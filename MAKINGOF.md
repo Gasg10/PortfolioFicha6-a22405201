@@ -14,6 +14,7 @@ Este documento é o meu diário de bordo do processo de desenvolvimento do proje
 O portefólio serve para agregar de forma organizada toda a minha informação académica: o curso que frequento, as unidades curriculares, os professores, os projetos que desenvolvi, as tecnologias que uso, os TFCs do DEISI, as competências que fui adquirindo, formações complementares e este próprio registo reflexivo do processo de construção.
 
 Tecnicamente, a aplicação usa **Django** com base de dados **SQLite** em desenvolvimento, na estrutura padrão com uma app chamada `portfolio`.
+![IMG_5495](https://github.com/user-attachments/assets/4ca89c00-5dda-4102-a4f2-c37e2ba53bd1)
 
 ---
 
@@ -186,6 +187,8 @@ Tal como nos projetos, os TFCs envolvem múltiplas tecnologias. Esta relação f
 ### 3.6 Competencia ↔ Tecnologia + Projeto (ManyToMany duplo)
 Uma competência é demonstrada com evidências concretas — os projetos onde a apliquei e as tecnologias que usei para o fazer. Por exemplo, "Desenvolvimento de APIs REST" liga-se ao Django, Django REST Framework e aos projetos web que desenvolvi. As duas relações ManyToMany permitem construir essa narrativa no portefólio.
 
+<img width="1917" height="908" alt="image" src="https://github.com/user-attachments/assets/6241cbf2-c3b9-4a90-958b-976e779171ee" />
+
 ---
 
 ## 4. Erros Encontrados e Correções
@@ -335,4 +338,4 @@ No entanto, todas as decisões de modelação — que campos criar, que relaçõ
 ---
 
 *Documento elaborado no âmbito da Ficha 6 — Portefólio Django*
-*Universidade Lusófona — LEI — 2024/2025*
+*Universidade Lusófona — LEI — 2025/2026*
