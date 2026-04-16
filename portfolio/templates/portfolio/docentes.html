@@ -1,0 +1,32 @@
+<!-- portfolio/templates/portfolio/docentes.html -->
+{% extends "portfolio/base.html" %}
+
+{% block content %}
+<h2>Docentes</h2>
+
+<section>
+    {% for docente in docentes %}
+    <article>
+        <header>
+            {% if docente.foto %}
+            <img src="{{ docente.foto.url }}" alt="Foto {{ docente.nome }}">
+            {% endif %}
+            <h3>{{ docente.nome }}</h3>
+            <p>{{ docente.email }}</p>
+        </header>
+        <section>
+            <h4>Unidades Curriculares</h4>
+            <ul>
+                {% for uc in docente.unidades_curriculares.all %}
+                    <li>{{ uc.sigla }} &mdash; {{ uc.nome }}</li>
+                {% empty %}
+                    <li>Sem UCs associadas</li>
+                {% endfor %}
+            </ul>
+        </section>
+    </article>
+    {% empty %}
+    <p>Sem docentes registados.</p>
+    {% endfor %}
+</section>
+{% endblock %}

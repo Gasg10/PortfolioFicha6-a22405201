@@ -1,0 +1,33 @@
+<!-- portfolio/templates/portfolio/licenciatura.html -->
+{% extends "portfolio/base.html" %}
+
+{% block content %}
+<h2>Licenciatura</h2>
+
+<section>
+    {% for lic in licenciaturas %}
+    <article>
+        <header>
+            {% if lic.logo %}
+            <img src="{{ lic.logo.url }}" alt="Logo {{ lic.nome }}">
+            {% endif %}
+            <h3>{{ lic.nome }}</h3>
+            <p>{{ lic.sigla }} &mdash; {{ lic.get_grau_display }}</p>
+            <p>{{ lic.area_cientifica }}</p>
+        </header>
+        <section>
+            <h4>Detalhes</h4>
+            <ul>
+                <li>Duração: {{ lic.duracao_anos }} anos</li>
+                <li>ECTS: {{ lic.ects_total }}</li>
+                <li>Início: {{ lic.ano_inicio }}</li>
+                <li>{{ lic.descricao }}</li>
+                {% if lic.url_lusofona %}<li><a href="{{ lic.url_lusofona }}" target="_blank">Página Lusófona</a></li>{% endif %}
+            </ul>
+        </section>
+    </article>
+    {% empty %}
+    <p>Sem licenciaturas registadas.</p>
+    {% endfor %}
+</section>
+{% endblock %}

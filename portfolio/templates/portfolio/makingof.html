@@ -1,0 +1,30 @@
+<!-- portfolio/templates/portfolio/makingof.html -->
+{% extends "portfolio/base.html" %}
+
+{% block content %}
+<h2>Making Of</h2>
+
+<section>
+    {% for entrada in makingof %}
+    <article>
+        <header>
+            {% if entrada.fotografia %}
+            <img src="{{ entrada.fotografia.url }}" alt="Foto {{ entrada.titulo }}">
+            {% endif %}
+            <h3>{{ entrada.titulo }}</h3>
+            <p>{{ entrada.get_tipo_display }} &mdash; {{ entrada.data }}</p>
+            <p>{{ entrada.entidade_relacionada }}</p>
+        </header>
+        <section>
+            <h4>Descrição</h4>
+            <ul>
+                <li>{{ entrada.descricao }}</li>
+                {% if entrada.uso_ia %}<li>IA: {{ entrada.uso_ia }}</li>{% endif %}
+            </ul>
+        </section>
+    </article>
+    {% empty %}
+    <p>Sem entradas registadas.</p>
+    {% endfor %}
+</section>
+{% endblock %}

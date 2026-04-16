@@ -1,0 +1,30 @@
+<!-- portfolio/templates/portfolio/competencias.html -->
+{% extends "portfolio/base.html" %}
+
+{% block content %}
+<h2>Competências</h2>
+
+<section>
+    {% for competencia in competencias %}
+    <article>
+        <header>
+            <h3>{{ competencia.nome }}</h3>
+            <p>{{ competencia.get_tipo_display }} &mdash; Nível: {{ competencia.nivel }}/5</p>
+            <p>{{ competencia.descricao }}</p>
+        </header>
+        <section>
+            <h4>Tecnologias</h4>
+            <ul>
+                {% for tec in competencia.tecnologias.all %}
+                    <li>{{ tec.nome }}</li>
+                {% empty %}
+                    <li>Sem tecnologias associadas</li>
+                {% endfor %}
+            </ul>
+        </section>
+    </article>
+    {% empty %}
+    <p>Sem competências registadas.</p>
+    {% endfor %}
+</section>
+{% endblock %}

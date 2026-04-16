@@ -1,0 +1,30 @@
+<!-- portfolio/templates/portfolio/formacoes.html -->
+{% extends "portfolio/base.html" %}
+
+{% block content %}
+<h2>Formações</h2>
+
+<section>
+    {% for formacao in formacoes %}
+    <article>
+        <header>
+            <h3>{{ formacao.titulo }}</h3>
+            <p>{{ formacao.instituicao }} &mdash; {{ formacao.get_tipo_display }}</p>
+            <p>{{ formacao.data_inicio }}{% if formacao.data_fim %} → {{ formacao.data_fim }}{% endif %}</p>
+        </header>
+        <section>
+            <h4>Tecnologias</h4>
+            <ul>
+                {% for tec in formacao.tecnologias.all %}
+                    <li>{{ tec.nome }}</li>
+                {% empty %}
+                    <li>Sem tecnologias associadas</li>
+                {% endfor %}
+            </ul>
+        </section>
+    </article>
+    {% empty %}
+    <p>Sem formações registadas.</p>
+    {% endfor %}
+</section>
+{% endblock %}

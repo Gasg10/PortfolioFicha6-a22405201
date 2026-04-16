@@ -1,0 +1,31 @@
+<!-- portfolio/templates/portfolio/tecnologias.html -->
+{% extends "portfolio/base.html" %}
+
+{% block content %}
+<h2>Tecnologias</h2>
+
+<section>
+    {% for tec in tecnologias %}
+    <article>
+        <header>
+            {% if tec.logo %}
+            <img src="{{ tec.logo.url }}" alt="Logo {{ tec.nome }}">
+            {% endif %}
+            <h3>{{ tec.nome }}</h3>
+            <p>{{ tec.get_tipo_display }} &mdash; Desde {{ tec.ano_inicio }}</p>
+            <p>Nível de interesse: {{ tec.nivel_interesse }}/5</p>
+        </header>
+        <section>
+            <h4>Detalhes</h4>
+            <ul>
+                <li>{{ tec.descricao }}</li>
+                <li>Em uso: {% if tec.em_uso %}Sim{% else %}Não{% endif %}</li>
+                {% if tec.url_website %}<li><a href="{{ tec.url_website }}" target="_blank">Website</a></li>{% endif %}
+            </ul>
+        </section>
+    </article>
+    {% empty %}
+    <p>Sem tecnologias registadas.</p>
+    {% endfor %}
+</section>
+{% endblock %}

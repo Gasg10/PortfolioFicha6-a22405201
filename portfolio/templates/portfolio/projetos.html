@@ -1,0 +1,33 @@
+<!-- portfolio/templates/portfolio/projetos.html -->
+{% extends "portfolio/base.html" %}
+
+{% block content %}
+<h2>Projetos</h2>
+
+<section>
+    {% for projeto in projetos %}
+    <article>
+        <header>
+            {% if projeto.imagem %}
+            <img src="{{ projeto.imagem.url }}" alt="Imagem {{ projeto.titulo }}">
+            {% endif %}
+            <h3>{{ projeto.titulo }}</h3>
+            <p>{{ projeto.unidade_curricular.sigla }} &mdash; {{ projeto.data_realizacao }}</p>
+            <p>Classificação: {{ projeto.classificacao }}</p>
+        </header>
+        <section>
+            <h4>Tecnologias</h4>
+            <ul>
+                {% for tec in projeto.tecnologias.all %}
+                    <li>{{ tec.nome }}</li>
+                {% empty %}
+                    <li>Sem tecnologias associadas</li>
+                {% endfor %}
+            </ul>
+        </section>
+    </article>
+    {% empty %}
+    <p>Sem projetos registados.</p>
+    {% endfor %}
+</section>
+{% endblock %}
