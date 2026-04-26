@@ -4,6 +4,8 @@
 {% block content %}
 <h2>Formações</h2>
 
+<a href="{% url 'formacao_criar' %}">Nova Formação</a>
+
 <section>
     {% for formacao in formacoes %}
     <article>
@@ -22,6 +24,8 @@
                 {% endfor %}
             </ul>
         </section>
+        <a href="{% url 'formacao_editar' formacao.pk %}">Editar</a>
+        <a href="{% url 'formacao_apagar' formacao.pk %}">Apagar</a>
     </article>
     {% empty %}
     <p>Sem formações registadas.</p>

@@ -4,25 +4,29 @@
 {% block content %}
 <h2>Tecnologias</h2>
 
+<a href="{% url 'tecnologia_criar' %}">Nova Tecnologia</a>
+
 <section>
-    {% for tec in tecnologias %}
+    {% for tecnologia in tecnologias %}
     <article>
         <header>
-            {% if tec.logo %}
-            <img src="{{ tec.logo.url }}" alt="Logo {{ tec.nome }}">
+            {% if tecnologia.logo %}
+            <img src="{{ tecnologia.logo.url }}" alt="Logo {{ tecnologia.nome }}">
             {% endif %}
-            <h3>{{ tec.nome }}</h3>
-            <p>{{ tec.get_tipo_display }} &mdash; Desde {{ tec.ano_inicio }}</p>
-            <p>Nível de interesse: {{ tec.nivel_interesse }}/5</p>
+            <h3>{{ tecnologia.nome }}</h3>
+            <p>{{ tecnologia.get_tipo_display }} &mdash; Desde {{ tecnologia.ano_inicio }}</p>
+            <p>Nível de interesse: {{ tecnologia.nivel_interesse }}/5</p>
         </header>
         <section>
             <h4>Detalhes</h4>
             <ul>
-                <li>{{ tec.descricao }}</li>
-                <li>Em uso: {% if tec.em_uso %}Sim{% else %}Não{% endif %}</li>
-                {% if tec.url_website %}<li><a href="{{ tec.url_website }}" target="_blank">Website</a></li>{% endif %}
+                <li>{{ tecnologia.descricao }}</li>
+                <li>Em uso: {% if tecnologia.em_uso %}Sim{% else %}Não{% endif %}</li>
+                {% if tecnologia.url_website %}<li><a href="{{ tecnologia.url_website }}" target="_blank">Website</a></li>{% endif %}
             </ul>
         </section>
+        <a href="{% url 'tecnologia_editar' tecnologia.pk %}">Editar</a>
+        <a href="{% url 'tecnologia_apagar' tecnologia.pk %}">Apagar</a>
     </article>
     {% empty %}
     <p>Sem tecnologias registadas.</p>

@@ -4,6 +4,8 @@
 {% block content %}
 <h2>Projetos</h2>
 
+<a href="{% url 'projeto_criar' %}">Novo Projeto</a>
+
 <section>
     {% for projeto in projetos %}
     <article>
@@ -25,6 +27,8 @@
                 {% endfor %}
             </ul>
         </section>
+        <a href="{% url 'projeto_editar' projeto.pk %}">Editar</a>
+        <a href="{% url 'projeto_apagar' projeto.pk %}">Apagar</a>
     </article>
     {% empty %}
     <p>Sem projetos registados.</p>

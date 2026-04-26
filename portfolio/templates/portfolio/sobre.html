@@ -1,0 +1,126 @@
+{% extends "portfolio/base.html" %}
+{% load markdownify %}
+
+{% block content %}
+<h1>Sobre esta Aplicação</h1>
+
+<section id="arquitetura">
+    <h2>1. Arquitetura MVT do Django</h2>
+    <p>
+        O Django usa o padrão MVT — Model, View, Template. O Model define as entidades
+        e comunica com a base de dados. A View recebe o pedido HTTP, consulta o Model
+        e prepara os dados. O Template recebe esses dados e gera o HTML devolvido ao browser.
+    </p>
+    <p>
+        Nesta aplicação, quando o utilizador acede a <code>/projetos/</code>, a View consulta
+        todos os objetos <code>Projeto</code> na base de dados e passa-os ao template
+        <code>projetos.html</code>, que os apresenta em HTML.
+    </p>
+    <img src="" alt="Diagrama MVT">
+
+    <h3>Video-tutorial — Formulário para criar um novo Projeto</h3>
+    <iframe
+        width="560"
+        height="315"
+        src="SUBSTITUIR_PELO_EMBED_YOUTUBE"
+        title="Video-tutorial formulário Django"
+        frameborder="0"
+        allowfullscreen>
+    </iframe>
+</section>
+
+<section id="modelacao">
+    <h2>2. Modelação</h2>
+    <p>
+        A base de dados tem 9 entidades: Licenciatura, Docente, UnidadeCurricular,
+        Projeto, Tecnologia, TFC, Competencia, Formacao e MakingOf.
+    </p>
+    <img src="" alt="Diagrama Entidade-Relação">
+
+    <h3>Definição em models.py</h3>
+    <pre><code>class Projeto(models.Model):
+    titulo = models.CharField(max_length=200)
+    descricao = models.TextField()
+    classificacao = models.DecimalField(max_digits=4, decimal_places=2)
+    destaque = models.BooleanField(default=False)
+    unidade_curricular = models.ForeignKey(UnidadeCurricular, on_delete=models.CASCADE)
+    tecnologias = models.ManyToManyField(Tecnologia, blank=True)
+
+class Tecnologia(models.Model):
+    nome = models.CharField(max_length=100)
+    tipo = models.CharField(max_length=20, choices=TIPO_CHOICES)
+    descricao = models.TextField()
+    nivel_interesse = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
+    em_uso = models.BooleanField(default=True)</code></pre>
+</section>
+
+<section id="tecnologias">
+    <h2>3. Tecnologias</h2>
+    {% for tipo, lista in tecnologias_agrupadas.items %}
+    <h3>{{ tipo }}</h3>
+    <ul>
+        {% for tec in lista %}
+        <li>
+            {% if tec.logo %}<img src="{{ tec.logo.url }}" alt="{{ tec.nome }}">{% endif %}
+            <strong>{{ tec.nome }}</strong> — {{ tec.descricao }}
+            {% if not tec.em_uso %}(já não em uso ativo){% endif %}
+        </li>
+        {% endfor %}
+    </ul>
+    {% empty %}
+    <p>Sem tecnologias registadas.</p>
+    {% endfor %}
+</section>
+
+<section id="estrutura">
+    <h2>4. Estrutura das Páginas</h2>
+    <img src="" alt="Mapa de navegação">
+    <ul>
+        <li><strong>/</strong> — Página inicial</li>
+        <li><strong>/licenciatura/</strong> — Licenciatura</li>
+        <li><strong>/docentes/</strong> — Docentes</li>
+        <li><strong>/ucs/</strong> — Unidades Curriculares</li>
+        <li><strong>/projetos/</strong> — Projetos (criar, editar, apagar)</li>
+        <li><strong>/tecnologias/</strong> — Tecnologias (criar, editar, apagar)</li>
+        <li><strong>/tfcs/</strong> — Trabalhos Finais de Curso</li>
+        <li><strong>/competencias/</strong> — Competências (criar, editar, apagar)</li>
+        <li><strong>/formacoes/</strong> — Formações (criar, editar, apagar)</li>
+        <li><strong>/makingof/</strong> — Making Of</li>
+        <li><strong>/sobre/</strong> — Sobre esta Aplicação</li>
+    </ul>
+</section>
+
+<section id="github">
+    <h2>5. Repositório GitHub</h2>
+    <p>
+        <a href="https://github.com/Gasg10/PortfolioFicha6-a22405201" target="_blank">
+            github.com/Gasg10/PortfolioFicha6-a22405201
+        </a>
+    </p>
+    <p>
+        O GitHub foi usado para controlo de versões ao longo de todo o desenvolvimento.
+        Cada funcionalidade foi registada num commit separado, permitindo ver a evolução
+        do projeto passo a passo e reverter alterações se necessário.
+    </p>
+</section>
+
+<section id="makingof">
+    <h2>6. Making-Of</h2>
+    {% for entrada in makingof %}
+    <article>
+        <h3>{{ entrada.titulo }}</h3>
+        <p><strong>{{ entrada.get_tipo_display }}</strong> — {{ entrada.data }}</p>
+        <div>{{ entrada.descricao|markdownify }}</div>
+        {% if entrada.uso_ia %}
+        <details>
+            <summary>Uso de IA</summary>
+            <p>{{ entrada.uso_ia }}</p>
+        </details>
+        {% endif %}
+    </article>
+    {% empty %}
+    <p>Sem entradas no Making-Of.</p>
+    {% endfor %}
+</section>
+
+{% endblock %}

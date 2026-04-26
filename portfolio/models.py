@@ -44,12 +44,11 @@ class Docente(models.Model):
 
 class Tecnologia(models.Model):
     TIPO_CHOICES = [
-        ('linguagem', 'Linguagem de Programação'),
-        ('framework', 'Framework'),
-        ('biblioteca', 'Biblioteca'),
-        ('ferramenta', 'Ferramenta'),
+        ('frontend', 'Frontend'),
+        ('backend', 'Backend'),
         ('base_dados', 'Base de Dados'),
-        ('outro', 'Outro'),
+        ('storage', 'Storage'),
+        ('outros', 'Outros'),
     ]
     nome = models.CharField(max_length=100)
     tipo = models.CharField(max_length=20, choices=TIPO_CHOICES)
