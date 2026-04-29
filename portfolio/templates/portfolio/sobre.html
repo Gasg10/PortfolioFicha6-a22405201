@@ -1,5 +1,5 @@
 {% extends "portfolio/base.html" %}
-{% load markdownify %}
+{% load markdownify static %}
 
 {% block content %}
 <h1>Sobre esta Aplicação</h1>
@@ -16,13 +16,13 @@
         todos os objetos <code>Projeto</code> na base de dados e passa-os ao template
         <code>projetos.html</code>, que os apresenta em HTML.
     </p>
-    <img src="" alt="Diagrama MVT">
+    <img src="{% static 'portfolio/mvt.png' %}" alt="Diagrama MVT">
 
     <h3>Video-tutorial — Formulário para criar um novo Projeto</h3>
     <iframe
         width="560"
         height="315"
-        src="SUBSTITUIR_PELO_EMBED_YOUTUBE"
+        src="https://www.youtube.com/embed/5-7rK67D4Fc"
         title="Video-tutorial formulário Django"
         frameborder="0"
         allowfullscreen>
@@ -35,7 +35,7 @@
         A base de dados tem 9 entidades: Licenciatura, Docente, UnidadeCurricular,
         Projeto, Tecnologia, TFC, Competencia, Formacao e MakingOf.
     </p>
-    <img src="" alt="Diagrama Entidade-Relação">
+    <img src="{% static 'portfolio/entidaderelacao.jpg' %}" alt="Diagrama Entidade-Relação">
 
     <h3>Definição em models.py</h3>
     <pre><code>class Projeto(models.Model):
