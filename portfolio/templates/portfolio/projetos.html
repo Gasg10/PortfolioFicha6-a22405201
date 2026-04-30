@@ -4,7 +4,9 @@
 {% block content %}
 <h2>Projetos</h2>
 
+{% if request.user.is_authenticated and request.user.groups.filter(name='gestor-portfolio').exists %}
 <a href="{% url 'projeto_criar' %}">Novo Projeto</a>
+{% endif %}
 
 <section>
     {% for projeto in projetos %}
@@ -27,8 +29,10 @@
                 {% endfor %}
             </ul>
         </section>
+        {% if request.user.is_authenticated and request.user.groups.filter(name='gestor-portfolio').exists %}
         <a href="{% url 'projeto_editar' projeto.pk %}">Editar</a>
         <a href="{% url 'projeto_apagar' projeto.pk %}">Apagar</a>
+        {% endif %}
     </article>
     {% empty %}
     <p>Sem projetos registados.</p>

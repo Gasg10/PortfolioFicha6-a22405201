@@ -1,0 +1,13 @@
+{% extends 'portfolio/base.html' %}
+{% block content %}
+<h2>Artigos</h2>
+{% if request.user.is_authenticated %}
+    <a href="{% url 'artigo_criar' %}" class="btn">Novo artigo</a>
+{% endif %}
+{% for artigo in artigos %}
+<div class="card">
+    <h3><a href="{% url 'artigo' artigo.pk %}">{{ artigo.titulo }}</a></h3>
+    <p>{{ artigo.autor }} · {{ artigo.data_criacao|date:"d/m/Y" }} · {{ artigo.likes.count }} ❤️</p>
+</div>
+{% endfor %}
+{% endblock %}

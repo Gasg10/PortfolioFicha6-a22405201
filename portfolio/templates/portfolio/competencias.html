@@ -4,7 +4,9 @@
 {% block content %}
 <h2>Competências</h2>
 
+{% if request.user.is_authenticated and request.user.groups.filter(name='gestor-portfolio').exists %}
 <a href="{% url 'competencia_criar' %}">Nova Competência</a>
+{% endif %}
 
 <section>
     {% for competencia in competencias %}
@@ -24,8 +26,10 @@
                 {% endfor %}
             </ul>
         </section>
+        {% if request.user.is_authenticated and request.user.groups.filter(name='gestor-portfolio').exists %}
         <a href="{% url 'competencia_editar' competencia.pk %}">Editar</a>
         <a href="{% url 'competencia_apagar' competencia.pk %}">Apagar</a>
+        {% endif %}
     </article>
     {% empty %}
     <p>Sem competências registadas.</p>

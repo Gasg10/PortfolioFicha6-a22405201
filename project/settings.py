@@ -19,7 +19,13 @@ INSTALLED_APPS = [
     'portfolio',
     'escola',
     'markdownify.apps.MarkdownifyConfig',
+    'accounts',
+    'artigos',
 ]
+
+LOGIN_URL = '/accounts/login/'
+LOGIN_REDIRECT_URL = '/portfolio/'
+LOGOUT_REDIRECT_URL = '/portfolio/'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

@@ -1,4 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
+from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
 from .models import Licenciatura, Docente, UnidadeCurricular, Projeto, Tecnologia, TFC, Competencia, Formacao, MakingOf
 from .forms import ProjetoForm, TecnologiaForm, CompetenciaForm, FormacaoForm
 
@@ -43,6 +45,7 @@ def makingof_view(request):
     return render(request, 'portfolio/makingof.html', {'makingof': makingof})
 
 
+@login_required
 def projeto_criar(request):
     form = ProjetoForm(request.POST or None, request.FILES or None)
     if form.is_valid():
@@ -51,6 +54,7 @@ def projeto_criar(request):
     return render(request, 'portfolio/projeto_form.html', {'form': form, 'titulo': 'Novo Projeto'})
 
 
+@login_required
 def projeto_editar(request, pk):
     projeto = get_object_or_404(Projeto, pk=pk)
     form = ProjetoForm(request.POST or None, request.FILES or None, instance=projeto)
@@ -60,6 +64,7 @@ def projeto_editar(request, pk):
     return render(request, 'portfolio/projeto_form.html', {'form': form, 'titulo': 'Editar Projeto'})
 
 
+@login_required
 def projeto_apagar(request, pk):
     projeto = get_object_or_404(Projeto, pk=pk)
     if request.method == 'POST':
@@ -72,6 +77,7 @@ def projeto_apagar(request, pk):
     })
 
 
+@login_required
 def tecnologia_criar(request):
     form = TecnologiaForm(request.POST or None, request.FILES or None)
     if form.is_valid():
@@ -80,6 +86,7 @@ def tecnologia_criar(request):
     return render(request, 'portfolio/tecnologia_form.html', {'form': form, 'titulo': 'Nova Tecnologia'})
 
 
+@login_required
 def tecnologia_editar(request, pk):
     tecnologia = get_object_or_404(Tecnologia, pk=pk)
     form = TecnologiaForm(request.POST or None, request.FILES or None, instance=tecnologia)
@@ -89,6 +96,7 @@ def tecnologia_editar(request, pk):
     return render(request, 'portfolio/tecnologia_form.html', {'form': form, 'titulo': 'Editar Tecnologia'})
 
 
+@login_required
 def tecnologia_apagar(request, pk):
     tecnologia = get_object_or_404(Tecnologia, pk=pk)
     if request.method == 'POST':
@@ -101,6 +109,7 @@ def tecnologia_apagar(request, pk):
     })
 
 
+@login_required
 def competencia_criar(request):
     form = CompetenciaForm(request.POST or None)
     if form.is_valid():
@@ -109,6 +118,7 @@ def competencia_criar(request):
     return render(request, 'portfolio/competencia_form.html', {'form': form, 'titulo': 'Nova Competência'})
 
 
+@login_required
 def competencia_editar(request, pk):
     competencia = get_object_or_404(Competencia, pk=pk)
     form = CompetenciaForm(request.POST or None, instance=competencia)
@@ -118,6 +128,7 @@ def competencia_editar(request, pk):
     return render(request, 'portfolio/competencia_form.html', {'form': form, 'titulo': 'Editar Competência'})
 
 
+@login_required
 def competencia_apagar(request, pk):
     competencia = get_object_or_404(Competencia, pk=pk)
     if request.method == 'POST':
@@ -130,6 +141,7 @@ def competencia_apagar(request, pk):
     })
 
 
+@login_required
 def formacao_criar(request):
     form = FormacaoForm(request.POST or None, request.FILES or None)
     if form.is_valid():
@@ -138,6 +150,7 @@ def formacao_criar(request):
     return render(request, 'portfolio/formacao_form.html', {'form': form, 'titulo': 'Nova Formação'})
 
 
+@login_required
 def formacao_editar(request, pk):
     formacao = get_object_or_404(Formacao, pk=pk)
     form = FormacaoForm(request.POST or None, request.FILES or None, instance=formacao)
@@ -147,6 +160,7 @@ def formacao_editar(request, pk):
     return render(request, 'portfolio/formacao_form.html', {'form': form, 'titulo': 'Editar Formação'})
 
 
+@login_required
 def formacao_apagar(request, pk):
     formacao = get_object_or_404(Formacao, pk=pk)
     if request.method == 'POST':

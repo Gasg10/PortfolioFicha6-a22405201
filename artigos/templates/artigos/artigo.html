@@ -1,0 +1,32 @@
+{% extends 'portfolio/base.html' %}
+{% block content %}
+<div class="card">
+    <h2>{{ artigo.titulo }}</h2>
+    <p>Por {{ artigo.autor }} em {{ artigo.data_criacao|date:"d/m/Y" }}</p>
+    {% if artigo.fotografia %}<img src="{{ artigo.fotografia.url }}" style="max-width:400px">{% endif %}
+    <p>{{ artigo.texto }}</p>
+    {% if artigo.link_externo %}<a href="{{ artigo.link_externo }}">Link externo</a>{% endif %}
+    <form method="post" action="{% url 'like_artigo' artigo.pk %}">
+        {% csrf_token %}
+        <button type="submit" class="btn">❤️ {{ artigo.likes.count }}</button>
+    </form>
+    {% if request.user == artigo.autor %}
+        <a href="{% url 'artigo_editar' artigo.pk %}" class="btn">Editar</a>
+    {% endif %}
+</div>
+<h3>Comentários</h3>
+{% for comentario in artigo.comentarios.all %}
+<div class="card">
+    <p><strong>{{ comentario.autor }}</strong> · {{ comentario.data|date:"d/m/Y" }}</p>
+    <p>{{ comentario.texto }}</p>
+</div>
+{% endfor %}
+{% if request.user.is_authenticated %}
+<h4>Adicionar comentário</h4>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn">Comentar</button>
+</form>
+{% endif %}
+{% endblock %}
