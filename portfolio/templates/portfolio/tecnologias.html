@@ -4,7 +4,7 @@
 {% block content %}
 <h2>Tecnologias</h2>
 
-{% if request.user.is_authenticated and request.user.groups.filter(name='gestor-portfolio').exists %}
+{% if request.user.is_authenticated %}
 <a href="{% url 'tecnologia_criar' %}">Nova Tecnologia</a>
 {% endif %}
 
@@ -27,7 +27,7 @@
                 {% if tecnologia.url_website %}<li><a href="{{ tecnologia.url_website }}" target="_blank">Website</a></li>{% endif %}
             </ul>
         </section>
-        {% if request.user.is_authenticated and request.user.groups.filter(name='gestor-portfolio').exists %}
+        {% if request.user.is_authenticated %}
         <a href="{% url 'tecnologia_editar' tecnologia.pk %}">Editar</a>
         <a href="{% url 'tecnologia_apagar' tecnologia.pk %}">Apagar</a>
         {% endif %}

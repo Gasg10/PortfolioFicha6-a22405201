@@ -4,7 +4,7 @@
 {% block content %}
 <h2>Formações</h2>
 
-{% if request.user.is_authenticated and request.user.groups.filter(name='gestor-portfolio').exists %}
+{% if request.user.is_authenticated %}
 <a href="{% url 'formacao_criar' %}">Nova Formação</a>
 {% endif %}
 
@@ -26,7 +26,7 @@
                 {% endfor %}
             </ul>
         </section>
-        {% if request.user.is_authenticated and request.user.groups.filter(name='gestor-portfolio').exists %}
+        {% if request.user.is_authenticated %}
         <a href="{% url 'formacao_editar' formacao.pk %}">Editar</a>
         <a href="{% url 'formacao_apagar' formacao.pk %}">Apagar</a>
         {% endif %}
