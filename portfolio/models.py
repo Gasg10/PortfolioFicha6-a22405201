@@ -124,9 +124,9 @@ class TFC(models.Model):
     descricao = models.TextField()
     ano = models.IntegerField()
     autor = models.CharField(max_length=200)
-    orientador = models.CharField(max_length=200)
-    url_repositorio = models.URLField(blank=True)
-    url_documento = models.URLField(blank=True)
+    orientador = models.TextField()
+    url_repositorio = models.URLField(max_length=500, blank=True)
+    url_documento = models.URLField(max_length=500, blank=True)
     destaque = models.BooleanField(default=False)
     tecnologias = models.ManyToManyField(Tecnologia, blank=True, related_name='tfcs')
 
@@ -136,7 +136,6 @@ class TFC(models.Model):
     class Meta:
         verbose_name = 'TFC'
         verbose_name_plural = 'TFCs'
-
 
 class Competencia(models.Model):
     TIPO_CHOICES = [
