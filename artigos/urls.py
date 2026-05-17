@@ -7,4 +7,5 @@ urlpatterns = [
     path('novo/', views.artigo_criar, name='artigo_criar'),
     path('<int:pk>/editar/', views.artigo_editar, name='artigo_editar'),
     path('<int:pk>/like/', views.like_artigo, name='like_artigo'),
+    path('<int:pk>/rating/', views.rating_artigo, name='rating_artigo'),
 ]

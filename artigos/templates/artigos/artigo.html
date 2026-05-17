@@ -14,6 +14,30 @@
         <a href="{% url 'artigo_editar' artigo.pk %}" class="btn">Editar</a>
     {% endif %}
 </div>
+
+<!-- Rating -->
+<div class="card">
+    <h3>⭐ Pontuação média: 
+        {% if artigo.ratings.count > 0 %}
+            {{ artigo.ratings.all|length }}
+        {% else %}
+            Sem avaliações
+        {% endif %}
+    </h3>
+    <form method="post" action="{% url 'rating_artigo' artigo.pk %}">
+        {% csrf_token %}
+        <label>Avalia este artigo:</label>
+        <select name="pontuacao">
+            <option value="1">⭐ 1</option>
+            <option value="2">⭐⭐ 2</option>
+            <option value="3">⭐⭐⭐ 3</option>
+            <option value="4">⭐⭐⭐⭐ 4</option>
+            <option value="5">⭐⭐⭐⭐⭐ 5</option>
+        </select>
+        <button type="submit" class="btn">Avaliar</button>
+    </form>
+</div>
+
 <h3>Comentários</h3>
 {% for comentario in artigo.comentarios.all %}
 <div class="card">
@@ -21,12 +45,11 @@
     <p>{{ comentario.texto }}</p>
 </div>
 {% endfor %}
-{% if request.user.is_authenticated %}
+
 <h4>Adicionar comentário</h4>
 <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit" class="btn">Comentar</button>
 </form>
-{% endif %}
 {% endblock %}

@@ -1,26 +1,46 @@
-<!-- portfolio/templates/portfolio/index.html -->
 {% extends "portfolio/base.html" %}
-
 {% block content %}
-<h2>Portfolio</h2>
-<section>
-    <article>
-        <header>
-            <h3>Bem-vindo ao Portfolio</h3>
-        </header>
-        <section>
-            <ul>
-                <li><a href="{% url 'licenciatura' %}">Licenciatura</a></li>
-                <li><a href="{% url 'docentes' %}">Docentes</a></li>
-                <li><a href="{% url 'ucs' %}">Unidades Curriculares</a></li>
-                <li><a href="{% url 'projetos' %}">Projetos</a></li>
-                <li><a href="{% url 'tecnologias' %}">Tecnologias</a></li>
-                <li><a href="{% url 'tfcs' %}">TFCs</a></li>
-                <li><a href="{% url 'competencias' %}">Competências</a></li>
-                <li><a href="{% url 'formacoes' %}">Formações</a></li>
-                <li><a href="{% url 'makingof' %}">Making Of</a></li>
-            </ul>
-        </section>
-    </article>
-</section>
+<style>
+  .hero {
+    height: 90vh;
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    padding: 20px;
+  }
+  .hero h1 { font-size: 3rem; margin-bottom: 10px; }
+  .hero p { font-size: 1.3rem; margin-bottom: 40px; opacity: 0.85; max-width: 600px; }
+  .hero-nav { display: flex; flex-wrap: wrap; gap: 12px; justify-content: center; }
+  .hero-nav a {
+    padding: 10px 22px;
+    background: rgba(255,255,255,0.15);
+    color: white;
+    text-decoration: none;
+    border-radius: 25px;
+    border: 1px solid rgba(255,255,255,0.3);
+    transition: all 0.3s;
+  }
+  .hero-nav a:hover { background: rgba(255,255,255,0.3); }
+  .hero-nav a.destaque { background: #e94560; border-color: #e94560; }
+</style>
+<div class="hero">
+  <h1>👋 Olá, sou Gonçalo Gonçalves</h1>
+  <p>Estudante de Engenharia Informática na Universidade Lusófona. Bem-vindo ao meu portfolio.</p>
+  <nav class="hero-nav">
+    <a href="{% url 'licenciatura' %}">Licenciatura</a>
+    <a href="{% url 'docentes' %}">Docentes</a>
+    <a href="{% url 'ucs' %}">UCs</a>
+    <a href="{% url 'projetos' %}">Projetos</a>
+    <a href="{% url 'tecnologias' %}">Tecnologias</a>
+    <a href="{% url 'tfcs' %}">TFCs</a>
+    <a href="{% url 'competencias' %}">Competências</a>
+    <a href="{% url 'formacoes' %}">Formações</a>
+    <a href="{% url 'makingof' %}">Making Of</a>
+    <a href="{% url 'sobre' %}" class="destaque">Sobre Mim</a>
+  </nav>
+</div>
 {% endblock %}

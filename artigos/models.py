@@ -21,3 +21,10 @@ class Comentario(models.Model):
 
     def __str__(self):
         return f"{self.autor} - {self.artigo}"
+
+class Rating(models.Model):
+    artigo = models.ForeignKey(Artigo, on_delete=models.CASCADE, related_name='ratings')
+    pontuacao = models.IntegerField()  # 1 a 5
+    
+    def __str__(self):
+        return f"Rating {self.pontuacao} - {self.artigo}"

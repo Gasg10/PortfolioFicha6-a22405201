@@ -19,24 +19,15 @@
     <img src="{% static 'portfolio/mvt.png' %}" alt="Diagrama MVT">
 
     <h3>Video-tutorial — Formulário para criar um novo Projeto</h3>
-    <iframe
-        width="560"
-        height="315"
-        src="https://www.youtube.com/embed/5-7rK67D4Fc"
-        title="Video-tutorial formulário Django"
-        frameborder="0"
-        allowfullscreen>
-    </iframe>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/5-7rK67D4Fc"
+        title="Video-tutorial formulário Django" frameborder="0" allowfullscreen></iframe>
 </section>
 
 <section id="modelacao">
     <h2>2. Modelação</h2>
-    <p>
-        A base de dados tem 9 entidades: Licenciatura, Docente, UnidadeCurricular,
-        Projeto, Tecnologia, TFC, Competencia, Formacao e MakingOf.
-    </p>
+    <p>A base de dados tem 9 entidades: Licenciatura, Docente, UnidadeCurricular,
+        Projeto, Tecnologia, TFC, Competencia, Formacao e MakingOf.</p>
     <img src="{% static 'portfolio/entidaderelacao.jpg' %}" alt="Diagrama Entidade-Relação">
-
     <h3>Definição em models.py</h3>
     <pre><code>class Projeto(models.Model):
     titulo = models.CharField(max_length=200)
@@ -44,14 +35,7 @@
     classificacao = models.DecimalField(max_digits=4, decimal_places=2)
     destaque = models.BooleanField(default=False)
     unidade_curricular = models.ForeignKey(UnidadeCurricular, on_delete=models.CASCADE)
-    tecnologias = models.ManyToManyField(Tecnologia, blank=True)
-
-class Tecnologia(models.Model):
-    nome = models.CharField(max_length=100)
-    tipo = models.CharField(max_length=20, choices=TIPO_CHOICES)
-    descricao = models.TextField()
-    nivel_interesse = models.IntegerField(validators=[MinValueValidator(1), MaxValueValidator(5)])
-    em_uso = models.BooleanField(default=True)</code></pre>
+    tecnologias = models.ManyToManyField(Tecnologia, blank=True)</code></pre>
 </section>
 
 <section id="tecnologias">
@@ -74,7 +58,6 @@ class Tecnologia(models.Model):
 
 <section id="estrutura">
     <h2>4. Estrutura das Páginas</h2>
-    <img src="" alt="Mapa de navegação">
     <ul>
         <li><strong>/</strong> — Página inicial</li>
         <li><strong>/licenciatura/</strong> — Licenciatura</li>
@@ -92,16 +75,10 @@ class Tecnologia(models.Model):
 
 <section id="github">
     <h2>5. Repositório GitHub</h2>
-    <p>
-        <a href="https://github.com/Gasg10/PortfolioFicha6-a22405201" target="_blank">
-            github.com/Gasg10/PortfolioFicha6-a22405201
-        </a>
-    </p>
-    <p>
-        O GitHub foi usado para controlo de versões ao longo de todo o desenvolvimento.
-        Cada funcionalidade foi registada num commit separado, permitindo ver a evolução
-        do projeto passo a passo e reverter alterações se necessário.
-    </p>
+    <p><a href="https://github.com/Gasg10/PortfolioFicha6-a22405201" target="_blank">
+        github.com/Gasg10/PortfolioFicha6-a22405201
+    </a></p>
+    <p>O GitHub foi usado para controlo de versões ao longo de todo o desenvolvimento.</p>
 </section>
 
 <section id="makingof">
@@ -121,6 +98,27 @@ class Tecnologia(models.Model):
     {% empty %}
     <p>Sem entradas no Making-Of.</p>
     {% endfor %}
+</section>
+
+<section id="cicd">
+    <h2>7. Arquitetura de Produção e CI/CD</h2>
+    <p>A aplicação corre num container Docker num servidor da Lusófona, com base de dados PostgreSQL no Neon e ficheiros de media no Cloudinary. Cada push para o GitHub desencadeia automaticamente um build e deploy via GitHub Actions.</p>
+    <ul>
+        <li><strong>Base de dados:</strong> PostgreSQL no Neon</li>
+        <li><strong>Media storage:</strong> Cloudinary</li>
+        <li><strong>Servidor:</strong> Container Docker no servidor pw.deisi.ulusofona.pt</li>
+        <li><strong>CI/CD:</strong> GitHub Actions — build, push e deploy automático</li>
+    </ul>
+    <p><a href="https://github.com/pw-2425-alunos/goncalogoncalves-a22405201" target="_blank">Repositório de Produção (CI/CD)</a></p>
+</section>
+
+<section id="contacto">
+    <h2>8. Contacto</h2>
+    <ul>
+        <li><a href="https://www.linkedin.com/in/gon%C3%A7alo-gon%C3%A7alves-308980317/" target="_blank">LinkedIn</a></li>
+        <li><a href="https://github.com/Gasg10" target="_blank">GitHub</a></li>
+        <li><a href="https://github.com/Gasg10/PortfolioFicha6-a22405201" target="_blank">Repositório do Portfolio</a></li>
+    </ul>
 </section>
 
 {% endblock %}

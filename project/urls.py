@@ -5,12 +5,12 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("escola/", include("escola.urls")),  # <- rota para aplicação web escola
+    path("escola/", include("escola.urls")),
     path("portfolio/", include("portfolio.urls")),
     path("accounts/", include("accounts.urls")),
     path("artigos/", include("artigos.urls")),
+    path("accounts/", include("allauth.urls")),
 ]
 
-# Serve ficheiros media em DEBUG
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

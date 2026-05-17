@@ -2,7 +2,16 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from .models import Artigo, Comentario
 from .forms import ArtigoForm, ComentarioForm
+from django.http import JsonResponse
 
+def rating_artigo(request, pk):
+    if request.method == 'POST':
+        artigo = get_object_or_404(Artigo, pk=pk)
+        pontuacao = int(request.POST.get('pontuacao', 0))
+        if 1 <= pontuacao <= 5:
+            from .models import Rating
+            Rating.objects.create(artigo=artigo, pontuacao=pontuacao)
+        return redirect('artigo', pk=pk)
 def artigos_view(request):
     artigos = Artigo.objects.all().order_by('-data_criacao')
     return render(request, 'artigos/artigos.html', {'artigos': artigos})

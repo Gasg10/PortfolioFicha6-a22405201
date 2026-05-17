@@ -7,10 +7,19 @@
     <title>Portfolio</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'portfolio/styles.css' %}">
+    <style>
+        .hamburger { display: none; font-size: 1.5rem; cursor: pointer; background: none; border: none; color: white; }
+        @media (max-width: 768px) {
+            header nav { display: none; flex-direction: column; width: 100%; }
+            header nav.mostrar { display: flex; }
+            .hamburger { display: block; }
+        }
+    </style>
 </head>
 <body>
     <header>
         <h1>Portfolio</h1>
+        <button class="hamburger">&#9776;</button>
         <nav>
             <a href="{% url 'portfolio_index' %}">Início</a>
             <a href="{% url 'licenciatura' %}">Licenciatura</a>
@@ -32,15 +41,19 @@
             {% endif %}
         </nav>
     </header>
-
     <main>
         {% block content %}
         {% endblock %}
     </main>
-
     <footer>
         <p>&copy; 2026</p>
     </footer>
-
+    <script>
+        const menu = document.querySelector('nav');
+        const botao = document.querySelector('.hamburger');
+        botao.addEventListener('click', () => {
+            menu.classList.toggle('mostrar');
+        });
+    </script>
 </body>
 </html>
